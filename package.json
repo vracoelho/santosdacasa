@@ -1,0 +1,20 @@
+{
+  "name": "my-ecommerce-shop",
+  "version": "1.0.0",
+  "description": "Ecommerce shop with a fake api",
+  "main": "index.js",
+  "author": "Moisés Santos",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./index.js",
+    "start-dev": "nodemon ./index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.6"
+  }
+}
