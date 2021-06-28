@@ -102,7 +102,6 @@ const refreshList = () => {
                     constructor(productList.length)
         }
 
-
         for(i = 0; i < productList.length;i++){
             let  sizesAvailable = []
             Object.keys(productList[i].sizes).forEach(key => {
@@ -175,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addMore = () => {
         numberOfProduct += 10 
         refreshList();
+        window.scrollTo(0, document.getElementsByTagName('footer')[0].offsetTop)
     }
 })
 

@@ -10,7 +10,6 @@ CHALLENGE:
 */
 
 //Get Data
-
 document.addEventListener ('DOMContentLoaded',  async () => { 
 
     let productId = window.location.href.split('id=')[1] 
