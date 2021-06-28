@@ -15,8 +15,12 @@ CHALLENGE:
     3 - pants
     4 - jackets
     http://localhost:5000/productlist.html
-*/
 
+    Improvements (1/3)
+    When i filter on the listing page (categories or sizes) i should highlight the selected values
+    Support multiple filters applied
+    Display multiple images via srcset ([images folders](https://github.com/moisessantos/shop-api/tree/master/client/imgs/products))
+*/
 
 const selectSortby = document.getElementsByTagName('select')[0]
 selectSortby.setAttribute('onchange', 'getSelectValue()')
@@ -33,6 +37,15 @@ const constructor = (a) => {
     productSection.innerHTML = ''
 
     for(i=0; i<a;i++){
+        const sizeThumbs='240w'
+        const sizeSmall='640w'
+        const sizeMedium='720w'
+        const sizeSrc='1200w'
+        const imgThumbs=`/imgs/products/thumbs/thumb${productList[i]['id']}.jpg ${sizeThumbs}`
+        const imgSmall=`/imgs/products/small/product${productList[i]['id']}.jpg ${sizeSmall}`
+        const imgMedium=`/imgs/products/medium/product${productList[i]['id']}.jpg ${sizeMedium}`
+        const imgScr=`/imgs/products/product${productList[i]['id']}.jpg ${sizeSrc}`
+
         let cardProduct = document.createElement('a')
         cardProduct.className = 'product-card col-6 col-d-4'
         cardProduct.href = `product.html?id=${productList[i]['id']}`
@@ -40,7 +53,10 @@ const constructor = (a) => {
 
         let cardProductdetail = 
         `<div class="product-card-image">
-            <img class="imgfit" src="${productList[i]['image']}">
+            <img class="imgfit"
+            src="${productList[i]['image']}"
+            srcset="${imgThumbs}, ${imgSmall}, ${imgMedium}, ${imgScr}"
+            sizes="(min-width: 1200px) 720px, (min-width: 750px) 640px, 240px">      
         </div>
         <p class="margintophalf marginbottomnone">${productList[i]['name']}</p>
         <p class="gray marginnone">${productList[i]['category'].map (i => category[i-1])}</p>
@@ -52,6 +68,7 @@ const constructor = (a) => {
     let loadMore = document.createElement('div')
     loadMore.className = 'central-link-light marginbottomdouble'
     loadMore.id = 'loadmore'
+    loadMore.setAttribute('onclick', 'addMore()')
     const loadMoredetail = `
     <a href="#" title="Load More">
     <i class="icn-reload"></i>
@@ -59,6 +76,13 @@ const constructor = (a) => {
     </div>`
     loadMore.innerHTML= loadMoredetail
     productSection.appendChild(loadMore)
+
+    if(productSection.childNodes.length-1 < numberOfProduct){
+        loadMore.style='visibility:hidden'
+    }
+    else{
+        loadMore.removeAttribute = 'style'
+    }
 }
 
 // Display products
@@ -75,7 +99,6 @@ const refreshList = () => {
             productList = productList.filter(product => 
                 product.category.some(categoryId => 
                     categoriesToFilter.indexOf(categoryId) !== -1))
-                    console.log(productList);
                     constructor(productList.length)
         }
 
@@ -110,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
     getSelectValue = () => {
         sortBy = document.querySelector('div#sortbar select').value.toLowerCase()
         refreshList();
-        console.log(sortBy)
     }
 
     // Categories
@@ -119,11 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
         li.addEventListener('click', () => {
 
             const categoryId = i+1;
-            console.log(categoryId)
             if(categoriesToFilter.indexOf(categoryId) === -1) {
                 categoriesToFilter.push(categoryId);
-                li.children[0].style.fontWeight = '700'
-
+                li.children[0].style = 'font-Weight:700; color:lightgrey'
 
             } else {
                 categoriesToFilter = categoriesToFilter.filter( id => id !== categoryId)
@@ -139,10 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener('click', () => {
 
             const sizeId = i+1;
-            console.log(sizeId)
             if(sizesToFilter.indexOf(sizeId) === -1) {
                 sizesToFilter.push(sizeId);
-                button.style = 'border-color:darkgrey; font-weight:700'
+                button.style = 'background-color:lightgrey; border-color:darkgrey; font-weight:700'
             } 
             else {
                 sizesToFilter = sizesToFilter.filter( id => id !== sizeId)
@@ -151,9 +170,14 @@ document.addEventListener("DOMContentLoaded", () => {
         refreshList()
         })
     })
+
+    // LoadMore
+    addMore = () => {
+        numberOfProduct += 10 
+        refreshList();
+    }
 })
 
-// LoadMore
 
 
 
