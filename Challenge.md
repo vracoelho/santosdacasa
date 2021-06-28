@@ -25,7 +25,7 @@
 ### Notes #2
 
 * Category ids available:
-    * 1 - snickers
+    * 1 - sneakers
     * 2 - coats
     * 3 - pants
     * 4 - jackets

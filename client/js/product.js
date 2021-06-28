@@ -9,14 +9,11 @@ CHALLENGE:
     Stars rating should be rounded (2.5 should display 3 full stars)
 */
 
-
-
 //Get Data
-//(window.location.href.split('id=')[1])
 
 document.addEventListener ('DOMContentLoaded',  async () => { 
 
-    let productId = 1
+    let productId = window.location.href.split('id=')[1] 
     const urlAPI = `/api/getProduct?productId=${productId}`
 
 
@@ -75,8 +72,3 @@ document.addEventListener ('DOMContentLoaded',  async () => {
         }
     }
 })
-
-
-
-
-

@@ -204,7 +204,7 @@ module.exports = {
         },
         {
             id: 12,
-            "name": "y3 snickers",
+            "name": "y3 Sneakers",
             "partnership": "Barclay",
             "brand": "Faith O. Barr",
             "quantity": 7,
@@ -385,7 +385,7 @@ module.exports = {
         },
         {
             id: 22,
-            name: "Ardidas snickers",
+            name: "Ardidas sneakers",
             "partnership": "Justin",
             "brand": "Jescie V. Riddle",
             "quantity": 2,
@@ -421,7 +421,7 @@ module.exports = {
         },
         {
             id: 24,
-            name: 'Y-3 red stripped snickers',
+            name: 'Y-3 red stripped sneakers',
             "partnership": "Octavius",
             "brand": "Fatima Z. Barber",
             "quantity": 8,
@@ -439,7 +439,7 @@ module.exports = {
         },
         {
             id: 25,
-            name: 'Y-3 white snickers',
+            name: 'Y-3 white sneakers',
             "partnership": "Brennan",
             "brand": "Akeem P. Gardner",
             "quantity": 7,
