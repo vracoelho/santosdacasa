@@ -33,7 +33,7 @@ let categoriesToFilter = []
 const sizes = ['1', '2', '3', '4']
 let sizesToFilter = []
 
-const constructor = (a) => {
+const builder = (a) => {
     productSection.innerHTML = ''
 
     for(i=0; i<a;i++){
@@ -68,7 +68,7 @@ const constructor = (a) => {
     let loadMore = document.createElement('div')
     loadMore.className = 'central-link-light marginbottomdouble'
     loadMore.id = 'loadmore'
-    loadMore.setAttribute('onclick', 'addMore()')
+    //loadMore.setAttribute('onclick', 'addMore()')
     const loadMoredetail = `
     <a href="#" title="Load More">
     <i class="icn-reload"></i>
@@ -76,6 +76,7 @@ const constructor = (a) => {
     </div>`
     loadMore.innerHTML= loadMoredetail
     productSection.appendChild(loadMore)
+    productSection.lastElementChild.addEventListener('click', addMore)
 
     if(productSection.childNodes.length-1 < numberOfProduct){
         loadMore.style='visibility:hidden'
@@ -93,13 +94,13 @@ const refreshList = () => {
     .then(resp => resp.json())
     .then(({ data }) => { 
         productList = data
-        constructor(productList.length)
+        builder(productList.length)
 
         if(categoriesToFilter.length > 0) {
             productList = productList.filter(product => 
                 product.category.some(categoryId => 
                     categoriesToFilter.indexOf(categoryId) !== -1))
-                    constructor(productList.length)
+                    builder(productList.length)
         }
 
         for(i = 0; i < productList.length;i++){
@@ -117,7 +118,7 @@ const refreshList = () => {
             productList = productList.filter(product => 
                 product.sizesAvailable.some(sizeId => 
                     sizesToFilter.indexOf(sizeId) !== -1))
-                    constructor(productList.length)
+                    builder(productList.length)
                     
             return productList
         }  
