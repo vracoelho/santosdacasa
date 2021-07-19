@@ -21,7 +21,7 @@ app.get('/api/getProductsList', (req, res) => {
             getProducts(req.query[params[0]]) :
             getProducts(req.query[params[0]], req.query[params[1]]);
     }
-    return res.status(result?.status || 200).send(result);
+    return res.status(result.status || 200).send(result);
 });
 app.get('/api/getProduct', (req, res) => {
     const params = Object.keys(req.query);
