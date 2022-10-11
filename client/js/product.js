@@ -48,7 +48,7 @@ document.addEventListener ('DOMContentLoaded',  async () => {
 
     //Set HTML product score
     const htmlScore = document.getElementsByClassName("score")[0].getElementsByTagName("span")[0]
-    htmlScore.innerText = `score of ${score}`
+    htmlScore.innerText = `${score} of 5`
     console.log(htmlScore)
 
     //Set HTML product stars

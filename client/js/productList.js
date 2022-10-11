@@ -94,13 +94,10 @@ const refreshList = () => {
     .then(resp => resp.json())
     .then(({ data }) => { 
         productList = data
-        builder(productList.length)
-
         if(categoriesToFilter.length > 0) {
             productList = productList.filter(product => 
                 product.category.some(categoryId => 
                     categoriesToFilter.indexOf(categoryId) !== -1))
-                    builder(productList.length)
         }
 
         for(i = 0; i < productList.length;i++){
@@ -110,7 +107,6 @@ const refreshList = () => {
                     sizesAvailable.push(parseInt(key))
                     productList[i].sizesAvailable = sizesAvailable
                 }
-                return productList[i]
             })
         } 
 
@@ -118,10 +114,8 @@ const refreshList = () => {
             productList = productList.filter(product => 
                 product.sizesAvailable.some(sizeId => 
                     sizesToFilter.indexOf(sizeId) !== -1))
-                    builder(productList.length)
-                    
-            return productList
         }  
+        builder(productList.length)
     })           
 }
 
